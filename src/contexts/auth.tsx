@@ -11,7 +11,7 @@ type User = {
 type AuthenticateData = {
   user: User | null;
   signInUrl: string;
-  signOut: () => void
+  signOut: () => void;
 };
 
 type AuthResponse = {
@@ -34,10 +34,10 @@ export function AuthProvider(props: AuthProvider) {
   const [user, setUser] = useState<User | null>(null);
   const signInUrl = `https://github.com/login/oauth/authorize?scope=user&client_id=ebe2002f5c8555f01004`;
 
-  function signOut () {
-    setUser(null);localStorage.removeItem('@dowhile:token')
+  function signOut() {
+    setUser(null);
+    localStorage.removeItem("@dowhile:token");
   }
-
 
   async function signIn(githubCode: string) {
     const response = await api.post<AuthResponse>("authenticate", {
@@ -45,6 +45,7 @@ export function AuthProvider(props: AuthProvider) {
     });
     const { token, user } = response.data;
     localStorage.setItem("@dowhile:token", token);
+    api.defaults.headers.common.authorization = `Bearer ${token}`;
     setUser(user);
   }
 
@@ -55,7 +56,7 @@ export function AuthProvider(props: AuthProvider) {
       //fazendo o token vir no cabeçalho da requisição
       api.defaults.headers.common.authorization = `Bearer ${token}`;
       api.get<User>("profile").then((response) => {
-        setUser(response.data)
+        setUser(response.data);
       });
     }
   }, []);
@@ -66,7 +67,7 @@ export function AuthProvider(props: AuthProvider) {
 
     if (hasGithubCode) {
       const [urlWithCode, githubCode] = url.split("?code=");
-      console.log({ urlWithCode, githubCode });
+
       window.history.pushState({}, "", urlWithCode);
 
       signIn(githubCode);
