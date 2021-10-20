@@ -11,6 +11,7 @@ type User = {
 type AuthenticateData = {
   user: User | null;
   signInUrl: string;
+  signOut: () => void
 };
 
 type AuthResponse = {
@@ -32,6 +33,11 @@ type AuthProvider = {
 export function AuthProvider(props: AuthProvider) {
   const [user, setUser] = useState<User | null>(null);
   const signInUrl = `https://github.com/login/oauth/authorize?scope=user&client_id=ebe2002f5c8555f01004`;
+
+  function signOut () {
+    setUser(null);localStorage.removeItem('@dowhile:token')
+  }
+
 
   async function signIn(githubCode: string) {
     const response = await api.post<AuthResponse>("authenticate", {
@@ -68,7 +74,7 @@ export function AuthProvider(props: AuthProvider) {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ signInUrl, user }}>
+    <AuthContext.Provider value={{ signInUrl, user, signOut }}>
       {props.children}
     </AuthContext.Provider>
   );
