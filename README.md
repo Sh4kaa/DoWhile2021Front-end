@@ -22,3 +22,5 @@ ou
 ```
 npm install
 ```
+
+![doWhile2021](https://user-images.githubusercontent.com/27507717/139941620-90395313-4c9b-4bc2-9bf2-689011d494f2.jpg)
