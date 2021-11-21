@@ -12,7 +12,7 @@
 - Html5
 - Socket.io 
 - Prisma client
-- express
+- Express
 
 
 ### Instalação
@@ -26,6 +26,7 @@ npm install
 ```
 ### Tela inicial
 ![doWhile2021](https://user-images.githubusercontent.com/27507717/139941620-90395313-4c9b-4bc2-9bf2-689011d494f2.jpg)
-
+### Tela de autenticação
+![loginPrint](https://user-images.githubusercontent.com/27507717/142766459-d2d6532d-75fc-4f97-beb0-f3c02e043701.jpg)
 ### Depois de logado
 ![printNLW](https://user-images.githubusercontent.com/27507717/142765640-16e89402-5b9b-47e4-abee-c92d6964f79a.jpg)
